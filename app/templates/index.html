@@ -1,0 +1,15 @@
+<!doctype html>
+<title>PDF Tools</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <h1><a href="">PDF Tools</a></h1>
+  <div class=content>
+	  {% block body %}
+	  	<h2>Select your files</h2>  	
+	    <form action="" method=post enctype=multipart/form-data>
+	      <p><input type=file name="file" multiple>
+	         <input type=submit value=Upload>
+	    </form>  
+	  {% endblock %}
+  </div>
+</div>
