@@ -1,9 +1,7 @@
 '''
-Created on 8 Dec 2012
-
-@author: ivan
+@author: Ivan Cruces
 '''
 
-UPLOAD_FOLDER = 'data'
+RESULT_PATH = 'data/result.pdf'
 ALLOWED_EXTENSIONS = set(['pdf'])
 DEBUG = True

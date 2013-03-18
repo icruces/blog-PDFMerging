@@ -4,7 +4,9 @@ from flask import request, render_template
 from pdfCore import PdfPyPdf
 from threading import Timer
 
-if not os.path.exists(settings.UPLOAD_FOLDER): os.makedirs(settings.UPLOAD_FOLDER)
+# create the result folder if it doesn't exist
+if not os.path.exists(os.path.dirname(settings.RESULT_PATH)): \
+    os.mkdir(os.path.dirname(settings.RESULT_PATH))
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -12,26 +14,28 @@ def allowed_file(filename):
            
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():    
-    if request.method == 'POST':   
+    if request.method == 'POST':
+        # create a list with all pdf files   
         files = []      
         for uploadedFile in request.files.getlist('file'):
             if allowed_file(uploadedFile.filename):
                 files.append(uploadedFile)
         
-        pdfCore = PdfPyPdf()    
-        dest = os.path.join(settings.UPLOAD_FOLDER, 'result.pdf')  
-        pdfCore.joinPdfs(files, dest)
-        t = Timer(60*10, delete, (dest,))
-        t.start();
+        # join pdf files
+        pdfCore = PdfPyPdf()         
+        pdfCore.joinPdfs(files, settings.RESULT_PATH)
         
+        # remove the file after 10 min
+        t = Timer(60*10, delete, (settings.RESULT_PATH,))
+        t.start();        
         
+        # close the files
         for uploadedFile in files:
             uploadedFile.close()
-                  
-        return render_template('show_links.html', link=os.path.join(settings.UPLOAD_FOLDER, 'result.pdf'))
+                          
+        return render_template('show_links.html', link=settings.RESULT_PATH)
     return render_template('index.html')
 
 def delete(dest):    
-    print dest
     if os.path.exists(dest):        
         os.remove(dest)
