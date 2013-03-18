@@ -3,3 +3,4 @@ venv
 .pydevproject
 .settings
 .project
+/data
