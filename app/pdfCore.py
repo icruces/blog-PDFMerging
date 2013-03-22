@@ -1,11 +1,9 @@
 from pyPdf import PdfFileReader, PdfFileWriter
-'''
-Created on 18 Nov 2012
-
-@author: Ivan Cruces
-'''
 
 class PdfPyPdf:
+    '''    
+    Class for merging and splitting pdf files.    
+    '''
     
     def __init__(self):
         pass
@@ -26,9 +24,9 @@ class PdfPyPdf:
     def splitPdf(self, pdfFile, splitPoint, dest1="result_1.pdf", dest2="result_2.pdf"):
         
         pdfReader = PdfFileReader(pdfFile)
-        if (pdfReader.getNumPages() <= splitPoint):
+        if (pdfReader.getNumPages() <= splitPoint):       
             self.__createPdf(pdfReader, 0, pdfReader.getNumPages(), dest1)
-        else:
+        else:        
             self.__createPdf(pdfReader, 0, splitPoint, dest1)
             self.__createPdf(pdfReader, splitPoint, pdfReader.getNumPages(), dest2) 
             
