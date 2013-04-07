@@ -1,7 +1,5 @@
-'''
-@author: Ivan Cruces
-'''
 
-RESULT_PATH = 'data/result.pdf'
+# configuration
+RESULT_PATH = 'data'
 ALLOWED_EXTENSIONS = set(['pdf'])
 DEBUG = True
