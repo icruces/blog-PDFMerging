@@ -12,5 +12,5 @@ if not os.path.exists(settings.RESULT_PATH): \
 if settings.DEBUG == True:
     from werkzeug.wsgi import SharedDataMiddleware
     app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-          '/': os.path.join(os.path.dirname(__file__), '.')
+          '/data': os.path.join(os.path.dirname(__file__), '../data')
         })
