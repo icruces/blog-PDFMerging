@@ -1,11 +1,11 @@
 import os, settings
-from app import app
+from app import myApp
 import uuid
 from flask import request, render_template
 from pdf_core import PdfHelper
 from threading import Timer
            
-@app.route('/', methods=['GET', 'POST'])
+@myApp.route('/', methods=['GET', 'POST'])
 def upload_file():    
     if request.method == 'POST':
         # create a list with all pdf files   
